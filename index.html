@@ -275,7 +275,7 @@ function openForm(){
 function closeForm(){
  document.getElementById("formPopup").style.display="none";
 }
-function addMelon(){
+async function addMelon(){
 
     const text = document.getElementById("newText").value;
     const author = document.getElementById("newAuthor").value;
@@ -333,8 +333,22 @@ function addMelon(){
 
     document.getElementById("canvas").appendChild(melon);
 
-    document.getElementById("newText").value = "";
-    document.getElementById("newAuthor").value = "";
+    await supabaseClient
+    .from("melons")
+    .insert([
+        {
+            branch: branch,
+            text: text,
+            author: author,
+            x: x,
+            y: y
+        }
+    ]);
+
+document.getElementById("newText").value = "";
+document.getElementById("newAuthor").value = "";
+
+closeForm();
 
     closeForm();
 
@@ -345,8 +359,6 @@ function addMelon(){
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-    
-alert("START");  
 
 const SUPABASE_URL = "https://jdckmheefxclgtnpjirr.supabase.co/rest/v1/";
 const SUPABASE_KEY = "sb_publishable__prtDgLwQApYrcFa2d2npw_72oT0LbN";
@@ -356,8 +368,6 @@ const supabaseClient = supabase.createClient(
     SUPABASE_KEY
 );
     
-alert("Supabase načten");
-
 </script>
 
 </body>

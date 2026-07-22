@@ -374,7 +374,42 @@ const SUPABASE_KEY = "sb_publishable__prtDgLwQApYrcFa2d2npw_72oT0LbN";
 const supabaseClient = supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
+
 );
+
+    loadMelons();
+
+async function loadMelons(){
+
+    const { data, error } = await supabaseClient
+        .from("melons")
+        .select("*");
+
+    if(error){
+        alert(error.message);
+        return;
+    }
+
+    data.forEach(m => {
+
+        const melon = document.createElement("div");
+
+        melon.className = "melon";
+        melon.style.left = m.x + "px";
+        melon.style.top = m.y + "px";
+
+        melon.innerHTML = "🍉";
+
+        melon.onclick = function(){
+            showMelon(m.text, m.author);
+        };
+
+        document.getElementById("canvas").appendChild(melon);
+
+    });
+
+}
+
     
 </script>
 

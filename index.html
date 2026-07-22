@@ -130,6 +130,13 @@ body{
 <div class="title">
 🍉MELOUNovník
 </div>
+ 
+
+<a href="#" class="addButton" onclick="openForm()">
+🍉 Přidat plod
+</a>
+
+
 
 <div id="viewport">
 
@@ -184,8 +191,6 @@ onclick="showMelon('Kolega pomohl s řešením problému.','')">
 
 </div>
 
-<a hrefidat plod
-</a>
 
 <div class="popup" id="popup">
 <div id="popupText"></div>
@@ -194,6 +199,52 @@ Zavřít
 </div>
 </div>
 
+<div class="popup" id="formPopup">
+
+<h2>🍉 Co dnes na MELOUNovníku vyrostlo?</h2>
+
+<p>
+<input type="radio" name="branch" value="Vím, co se děje">
+Vím, co se děje
+</p>
+
+<p>
+<input type="radio" name="branch" value="Někdo to řeší">
+Někdo to řeší
+</p>
+
+<p>
+<input type="radio" name="branch" value="Jde to jednoduše">
+Jde to jednoduše
+</p>
+
+<p>
+<input type="radio" name="branch" value="Dotáhne se to">
+Dotáhne se to
+</p>
+
+<textarea
+id="newText"
+rows="4"
+style="width:100%;"
+placeholder="Co se dnes povedlo?"
+></textarea>
+
+<br><br>
+
+<input
+id="newAuthor"
+style="width:100%;"
+placeholder="Jméno (volitelné)"
+>
+
+<br><br>
+
+<button onclick="closeForm()">
+Zavřít
+</button>
+
+</div>
 <script>
 
 function showMelon(text, author){
@@ -211,6 +262,14 @@ document.getElementById("popup").style.display = "block";
 
 function closePopup(){
 document.getElementById("popup").style.display = "none";
+}
+
+function openForm(){
+ document.getElementById("formPopup").style.display="block";
+}
+
+function closeForm(){
+ document.getElementById("formPopup").style.display="none";
 }
 
 </script>

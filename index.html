@@ -7,134 +7,207 @@
 <title>MELOUNovník</title>
 
 <style>
+
 body{
     margin:0;
-    font-family: Arial, sans-serif;
-    background:#f4f8f1;
+    background:#f5f7f2;
+    font-family:Arial, sans-serif;
+    overflow:hidden;
 }
 
-#map{
+#viewport{
     width:100vw;
     height:100vh;
     overflow:auto;
 }
 
-.tree{
+#canvas{
     position:relative;
-    width:1400px;
-    height:1000px;
-    margin:auto;
+    width:1800px;
+    height:1400px;
 }
 
-.trunk{
+.tree-trunk{
     position:absolute;
-    top:430px;
-    left:560px;
-    width:280px;
-    height:180px;
-    background:#7a5230;
-    border-radius:20px;
+    left:800px;
+    top:500px;
+
+    width:180px;
+    height:350px;
+
+    background:#8a5b3e;
+    border-radius:12px;
+
     color:white;
+    font-size:48px;
+    font-weight:bold;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:48px;
-    font-weight:bold;
+
+    writing-mode:vertical-rl;
+    text-orientation:upright;
 }
 
 .branch{
     position:absolute;
     color:#2d6f2d;
-    font-size:28px;
     font-weight:bold;
+    font-size:34px;
 }
 
-.branch1{
-    top:120px;
-    left:520px;
+.leaf{
+    position:absolute;
+    font-size:44px;
 }
 
-.branch2{
-    top:400px;
-    left:120px;
+.melon{
+    position:absolute;
+    font-size:42px;
+    cursor:pointer;
 }
 
-.branch3{
-    top:400px;
-    right:120px;
+.melon:hover{
+    transform:scale(1.15);
 }
 
-.branch4{
-    bottom:120px;
-    left:500px;
+.popup{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 0 25px rgba(0,0,0,.2);
+    display:none;
+    max-width:350px;
+    z-index:1000;
 }
 
-.melons{
-    font-size:46px;
+.close{
+    margin-top:15px;
+    cursor:pointer;
+    color:green;
+    font-weight:bold;
 }
 
 .addButton{
     position:fixed;
     bottom:20px;
     right:20px;
-    background:#3f9b3f;
+
+    background:#41a541;
     color:white;
-    padding:15px 20px;
-    border-radius:30px;
+
+    padding:18px 24px;
+    border-radius:40px;
+
     text-decoration:none;
     font-weight:bold;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
 }
 
 .title{
-    text-align:center;
-    font-size:42px;
+    position:fixed;
+    top:10px;
+    left:15px;
+
+    font-size:32px;
+    font-weight:bold;
     color:#2d6f2d;
-    margin-top:20px;
 }
+
 </style>
 </head>
 
 <body>
 
 <div class="title">
-🌳 MELOUNovník
+🍈 MELOUNovník
 </div>
 
-<div id="map">
+<div id="viewport">
 
-<div class="tree">
+<div id="canvas">
 
-<div class="branch branch1">
-Vím, co se děje
-<div class="melons">🍈 🍈 🍈</div>
-</div>
-
-<div class="branch branch2">
-Někdo to řeší
-<div class="melons">🍈 🍈</div>
-</div>
-
-<div class="branch branch3">
-Jde to jednoduše
-<div class="melons">🍈 🍈 🍈 🍈</div>
-</div>
-
-<div class="branch branch4">
-Dotáhne se to
-<div class="melons">🍈</div>
-</div>
-
-<div class="trunk">
+<div class="tree-trunk">
 JISTOTA
 </div>
 
+<div class="branch" style="left:760px;top:180px;">
+Vím, co se děje
+</div>
+
+<div class="branch" style="left:230px;top:500px;">
+Někdo to řeší
+</div>
+
+<div class="branch" style="left:1180px;top:500px;">
+Jde to jednoduše
+</div>
+
+<div class="branch" style="left:720px;top:1050px;">
+Dotáhne se to
+</div>
+
+<div class="leaf" style="left:620px;top:170px;">🍃</div>
+<div class="leaf" style="left:910px;top:170px;">🍃</div>
+<div class="leaf" style="left:260px;top:420px;">🍃</div>
+<div class="leaf" style="left:1280px;top:430px;">🍃</div>
+<div class="leaf" style="left:800px;top:980px;">🍃</div>
+
+<div class="melon" style="left:670px;top:250px;"
+onclick="showMelon('Klient věděl, co se děje.','Michaela')">
+🍈
+</div>
+
+<div class="melon" style="left:1210px;top:600px;"
+onclick="showMelon('Podařilo se zjednodušit postup.','Jan')">
+🍈
+</div>
+
+<div class="melon" style="left:330px;top:620px;"
+onclick="showMelon('Kolega pomohl s řešením problému.','')">
+🍈
 </div>
 
 </div>
 
-#
-🍈 Přidat plod
+</div>
+
+<a hrefidat plod
 </a>
+
+<div class="popup" id="popup">
+<div id="popupText"></div>
+<div class="close" onclick="closePopup()">
+Zavřít
+</div>
+</div>
+
+<script>
+
+function showMelon(text, author){
+
+let content = text;
+
+if(author){
+content += "<br><br><b>" + author + "</b>";
+}
+
+document.getElementById("popupText").innerHTML = content;
+document.getElementById("popup").style.display = "block";
+
+}
+
+function closePopup(){
+document.getElementById("popup").style.display = "none";
+}
+
+</script>
 
 </body>
 </html>

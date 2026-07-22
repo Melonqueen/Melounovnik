@@ -335,7 +335,7 @@ async function addMelon(){
 
     alert("Jdu ukládat");
     
-    await supabaseClient
+    const { data, error } = await supabaseClient
     .from("melons")
     .insert([
         {
@@ -347,7 +347,11 @@ async function addMelon(){
         }
     ]);
 
-alert("Uloženo");
+if(error){
+    alert("CHYBA: " + error.message);
+}else{
+    alert("Uloženo do databáze");
+}
 
 document.getElementById("newText").value = "";
 document.getElementById("newAuthor").value = "";

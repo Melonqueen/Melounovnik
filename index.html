@@ -240,6 +240,10 @@ placeholder="Jméno (volitelné)"
 
 <br><br>
 
+<button onclick="addMelon()">
+🍉 Přidat na strom
+</button>
+
 <button onclick="closeForm()">
 Zavřít
 </button>
@@ -271,7 +275,71 @@ function openForm(){
 function closeForm(){
  document.getElementById("formPopup").style.display="none";
 }
+function addMelon(){
 
+    const text = document.getElementById("newText").value;
+    const author = document.getElementById("newAuthor").value;
+
+    const selected = document.querySelector('input[name="branch"]:checked');
+
+    if(!selected){
+        alert("Vyber větev.");
+        return;
+    }
+
+    if(!text.trim()){
+        alert("Napiš, co se povedlo.");
+        return;
+    }
+
+    const branch = selected.value;
+
+    let x;
+    let y;
+
+    // Zóny jednotlivých větví
+
+    if(branch === "Vím, co se děje"){
+        x = 600 + Math.random()*300;
+        y = 180 + Math.random()*120;
+    }
+
+    if(branch === "Někdo to řeší"){
+        x = 250 + Math.random()*250;
+        y = 350 + Math.random()*180;
+    }
+
+    if(branch === "Jde to jednoduše"){
+        x = 1100 + Math.random()*250;
+        y = 350 + Math.random()*180;
+    }
+
+    if(branch === "Dotáhne se to"){
+        x = 650 + Math.random()*250;
+        y = 500 + Math.random()*150;
+    }
+
+    const melon = document.createElement("div");
+
+    melon.className = "melon";
+    melon.style.left = x + "px";
+    melon.style.top = y + "px";
+
+    melon.innerHTML = "🍉";
+
+    melon.onclick = function(){
+        showMelon(text, author);
+    };
+
+    document.getElementById("canvas").appendChild(melon);
+
+    document.getElementById("newText").value = "";
+    document.getElementById("newAuthor").value = "";
+
+    closeForm();
+
+}
+    
 </script>
 
 </body>

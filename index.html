@@ -333,6 +333,8 @@ async function addMelon(){
 
     document.getElementById("canvas").appendChild(melon);
 
+    alert("Jdu ukládat");
+    
     await supabaseClient
     .from("melons")
     .insert([
@@ -344,6 +346,8 @@ async function addMelon(){
             y: y
         }
     ]);
+
+alert("Uloženo");
 
 document.getElementById("newText").value = "";
 document.getElementById("newAuthor").value = "";

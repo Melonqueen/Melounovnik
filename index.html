@@ -294,9 +294,6 @@ async function addMelon(){
 
     alert("3");
 
-    ...
-    
-
     const text = document.getElementById("newText").value;
     const author = document.getElementById("newAuthor").value;
 
@@ -346,11 +343,7 @@ async function addMelon(){
     melon.style.top = y + "px";
 
     melon.innerHTML = "🍉";
-    if(index === data.length - 1){
-    melon.style.fontSize = "60px";
-    melon.style.filter = "drop-shadow(0 0 10px gold)";
-}
-
+   
     melon.onclick = function(){
         showMelon(text, author);
     };

@@ -385,7 +385,7 @@ async function loadMelons(){
     document.getElementById("melonCount").innerHTML =
 data.length + "🍉 ";
     
-    data.forEach(m => {
+    data.forEach((m, index) => {
 
         const melon = document.createElement("div");
 
@@ -394,6 +394,10 @@ data.length + "🍉 ";
         melon.style.top = m.y + "px";
 
         melon.innerHTML = "🍉";
+        if(index === data.length - 1){
+    melon.style.fontSize = "60px";
+    melon.style.filter = "drop-shadow(0 0 10px gold)";
+}
 
         melon.onclick = function(){
             showMelon(m.text, m.author);

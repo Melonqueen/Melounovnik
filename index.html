@@ -172,21 +172,6 @@ Dotáhne se to
 </div>
 
 
-<div class="melon" style="left:670px;top:250px;"
-onclick="showMelon('Klient věděl, co se děje.','Michaela')">
-🍉
-</div>
-
-<div class="melon" style="left:1210px;top:600px;"
-onclick="showMelon('Podařilo se zjednodušit postup.','Jan')">
-🍉
-</div>
-
-<div class="melon" style="left:330px;top:620px;"
-onclick="showMelon('Kolega pomohl s řešením problému.','')">
-🍉
-</div>
-
 </div>
 
 </div>
@@ -332,8 +317,6 @@ async function addMelon(){
     };
 
     document.getElementById("canvas").appendChild(melon);
-
-    alert("Jdu ukládat");
     
     const { data, error } = await supabaseClient
     .from("melons")
@@ -349,8 +332,6 @@ async function addMelon(){
 
 if(error){
     alert("CHYBA: " + error.message);
-}else{
-    alert("Uloženo do databáze");
 }
 
 document.getElementById("newText").value = "";

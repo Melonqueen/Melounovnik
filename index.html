@@ -278,14 +278,10 @@ function closeForm(){
 }
 async function addMelon(){
 
-    alert("1");
-
     const text = document.getElementById("newText").value;
     const author = document.getElementById("newAuthor").value;
 
-    alert("2");
-
-    const selected = document.querySelector('input[name="branch"]:checked');
+     const selected = document.querySelector('input[name="branch"]:checked');
 
     if(!selected){
         alert("Vyber větev.");
@@ -340,7 +336,6 @@ async function addMelon(){
 
     document.getElementById("canvas").appendChild(melon);
 
-alert("4");
     
     const { data, error } = await supabaseClient
     .from("melons")
@@ -354,8 +349,7 @@ alert("4");
         }
     ]);
 
-    alert("5");
-
+ 
 if(error){
     alert("CHYBA: " + error.message);
 }
